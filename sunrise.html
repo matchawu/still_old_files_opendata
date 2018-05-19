@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $.get("https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400", function(data, status){
+            // alert("Data: " + data.results.day_length + "\nStatus: " + status);
+            // console.log(data.status == 'OK');
+            $("#status").text("Data status is "+ data.status);
+            if(data.status == 'OK'){
+                $("#demo").append("<div>"+"日出時間:"+data.results.sunrise+"</div>");
+                $("#demo").append("<div>"+"日落時間:"+data.results.sunset+"</div>");
+                $("#demo").append("<div>"+"白天時長:"+data.results.day_length+"</div>");
+                $("#demo").append("<div>"+"solar_noon:"+data.results.solar_noon+"</div>");
+                $("#demo").append("<div>"+"civil_twilight_begin:"+data.results.civil_twilight_begin+"</div>");
+                $("#demo").append("<div>"+"civil_twilight_end:"+data.results.civil_twilight_end+"</div>");
+                $("#demo").append("<div>"+"nautical_twilight_begin:"+data.results.nautical_twilight_begin+"</div>");
+                $("#demo").append("<div>"+"nautical_twilight_end:"+data.results.nautical_twilight_end+"</div>");
+                $("#demo").append("<div>"+"astronomical_twilight_begin:"+data.results.astronomical_twilight_begin+"</div>");
+                $("#demo").append("<div>"+"astronomical_twilight_end:"+data.results.astronomical_twilight_end+"</div>");
+            }
+            
+        });
+    });
+});
+</script>
+</head>
+<body>
+    <!-- add -->
+    <p id="status"></p>
+    <p id="demo"></p>
+    <!-- add -->
+<button type="button" class="btn-lg btn-success">獲取神秘資訊</button>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+var x = new XMLHttpRequest();
+x.open("GET", "http://opendata2.epa.gov.tw/AQI.xml", true);
+x.onreadystatechange = function () {
+  if (x.readyState == 4 && x.status == 200)
+  {
+    // get XML
+    var doc = x.responseXML;
+    console.log(doc);
+    //
+    var objRoot = doc.documentElement;
+    // console.log(objRoot);
+    var DataObj = objRoot.getElementsByTagName("/AQI/Data");
+    console.log(DataObj);
+    // for (var i=0;i<DataObj.length;i++)
+    // {    
+    //     html += "<tr><td>" + DataObj[i].getElementsByTagName("County")[0].text + "</td>";
+    //     html += "<td>" + DataObj[i].getElementsByTagName("AQI")[0].text + "</td>";
+    //     html += "<td>" + DataObj[i].getAttribute("SiteName")  + "</td></tr>";
+        
+    //     document.getElementById("Staff").innerHTML=html;
+    // }
+    //
+  }
+};
+x.send(null);
+</script>
+<div></div>
+<div id="Staff"></div>
+</body>
+
+</html>

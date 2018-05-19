@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+$.getJSON('http://opendata2.epa.gov.tw/AQI.json', function(data) {
+    //data is the JSON string
+    // console.log(data);
+    $.each(data, function(i , field){
+        $("#json").append("<div>"+ (i+1) +" has AQI:"+ field.AQI +" in  "+ field.County + field.SiteName +" at "+ field.PublishTime+"</div>");
+    });
+});
+
+</script>
+<div class="contaniner">
+    <h1>AQI open data</h1>
+</div>
+<div id="json"></div>
+</body>
+</html>

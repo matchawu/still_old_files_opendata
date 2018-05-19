@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<People>
+   <person id="1" dep="行政">
+       <name>Jason</name>
+       <mobile>0911222333</mobile>
+   </person>
+   <person id="2" dep="財務">
+       <name>Amy</name>
+       <mobile>0922456333</mobile>
+   </person>
+   <person id="3" dep="資訊">
+       <name>Alex</name>
+       <mobile>0945886333</mobile>
+   </person>
+</People>

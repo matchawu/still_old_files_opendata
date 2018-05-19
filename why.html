@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+
+<script>
+
+function loadXML(xmlFilePath)  //載入XML
+{         
+   if(window.ActiveXObject)// code for IE 
+   {  
+    xmlDoc = new ActiveXObject('Microsoft.XMLDOM');   
+    xmlDoc.async = false;  
+    xmlDoc.load(xmlFilePath);     
+   }
+   else if (document.implementation&&document.implementation.createDocument)// code for Mozilla, etc. 
+   {  
+    xmlDoc = document.implementation.createDocument('', '', null);  
+    xmlDoc.load(xmlFilePath); 
+   } 
+   else 
+   {  
+    alert('您的瀏覽器不支持xml文件讀取,於是本頁面禁止您的操作,推薦使用IE5.0以上可以解決此問題!');   
+    return null; 
+   }    
+}
+
+//載入 xml
+loadXML('xmll.xml');
+
+var objRoot = xmlDoc.documentElement
+var PeopleObj = objRoot.selectNodes("//People/person");
+
+//*innerHTML 和 write 自帶了語法檢查功能,他會自動把不完整的HTML代碼補充完整 *
+var html='<table width ="300"  border ="1"><tr><td>編號<td>姓名<td>手機<td>部門';
+
+ 
+
+for (var i=0;i<PeopleObj.length;i++)
+{    
+  // xml內容串Table語法
+  html += "<tr><td>" +   PeopleObj[i].getAttribute("id") + "</td>";
+  html += "<td>" + PeopleObj[i].getElementsByTagName("name")[0].text + "</td>";
+  html += "<td>" + PeopleObj[i].getElementsByTagName("mobile")[0].text + "</td>";
+  html += "<td>" + PeopleObj[i].getAttribute("dep")  + "</td></tr>";
+  
+  //找出財務部的人
+  dep = PeopleObj[i].getAttribute("dep");  
+  if (dep=='財務')
+  {
+      var childs =PeopleObj[i].childNodes;
+      
+      for(var k=0; k<childs.length; k++) 
+      {   
+             var child = childs[k];
+            
+          switch(child.nodeName)
+          {
+              case "name":                                     
+                     document.getElementsByName("fname")[0].value= child.text;                    
+                  break;
+         
+              case "mobile":                           
+                  document.getElementsByName("fmobile")[0].value= child.text;
+               break;
+               
+          default:    
+          }
+       }           
+   }  
+}
+ 
+  //document.write(html);  這個輸出也行
+  // XML輸出到 table
+  document.getElementById("Staff").innerHTML=html;
+</script>
+</body>
+</html>
